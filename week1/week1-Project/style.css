@@ -1,0 +1,31 @@
+*{
+   /* border: 0.5px solid red;*/
+    font-family: monospace;
+
+}
+
+      
+body{
+     font-size: 19px; 
+}
+
+
+h1,h2{
+    color: blue;
+}
+p{
+    color: purple !important;
+}
+.gray{
+    color:gray;
+}
+.gray:hover{
+    color:blue;
+}
+#second{
+    font-style: italic;
+}
+p span{
+    text-transform: uppercase;
+    background-color: brown;
+}

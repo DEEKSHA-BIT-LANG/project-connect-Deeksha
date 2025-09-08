@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deeksha's Portfolio</title>
+    <style>
+        :root {
+            --primary-color: #8B4513; 
+            --accent-color: #10A56A; 
+            --hover-color: #98FB98; 
+            --text-color: #333;
+            --background-color: #fff;
+            --font-family: 'Arial', sans-serif;
+            --border-radius: 10px;
+            --font-size: 16px;
+            --spacing: 1rem;
+        }
+
+        body {
+            font-family: var(--font-family);
+            margin: 0;
+            padding: 0;
+            background-color: var(--background-color);
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: var(--spacing);
+        }
+
+        section {
+            padding: var(--spacing);
+            margin: var(--spacing);
+            background-color: rgba(16, 165, 106, 0.7);
+            border-radius: var(--border-radius);
+        }
+
+        h1, h2, h3, h4 {
+            color: purple;
+        }
+
+        nav {
+            background-color: var(--primary-color);
+            padding: var(--spacing);
+            border-radius: var(--border-radius);
+            text-align: center;
+            position: sticky; /* keeps navbar always visible */
+            top: 0;
+            z-index: 1000;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 15px;
+            font-size: 18px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--hover-color);
+        }
+
+        .menu-icon {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
+        .project-card {
+            background-color: var(--accent-color);
+            padding: var(--spacing);
+            border-radius: var(--border-radius);
+            text-align: center;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form input[type="submit"] {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: var(--spacing);
+        }
+
+        #mobile-menu {
+            display: none; 
+            text-align: center;
+        }
+
+        @media (max-width: 768px) {
+            nav a {
+                display: none;
+            }
+
+            .menu-icon {
+                display: block; 
+            }
+
+            #mobile-menu.active {
+                display: block; 
+            }
+        }
+
+        #about img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%; 
+            margin-top: 1rem;
+            max-width: 100%; /* responsive */
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Welcome to Deeksha's Portfolio</h1>
+        <p>Discover my work, skills, and more!</p>
+    </header>
+
+    <nav>
+        <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+        <div id="mobile-menu">
+            <a href="#about">About Me</a>
+            <a href="#skills">Skills</a>
+            <a href="#projects">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <a href="#about">About Me</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#contact">Contact</a>
+    </nav>
+
+    <section id="about">
+        <h2>About Me</h2>
+        <img src="images/dee.jpg" alt="Deeksha's Photo">
+        <p>I am Deeksha, a 3rd-year computer science student passionate about technology and web development.</p>
+    </section>
+
+    <section id="skills">
+        <h2>My Skills</h2>
+        <ul>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>Python</li>
+            <li>Java</li>
+        </ul>
+    </section>
+
+    <section id="projects">
+        <h2>My Projects</h2>
+        <div class="projects">
+            <div class="project-card">
+                <h3>Portfolio Website</h3>
+                <p>A personal website to showcase my work and skills.</p>
+            </div>
+            <div class="project-card">
+                <h3>Quiz App</h3>
+                <p>An interactive web-based quiz application.</p>
+            </div>
+            <div class="project-card">
+                <h3>QR-Drive</h3>
+                <p>A tool for creating and sharing QR codes with drive links.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact">
+        <h2>Contact Me</h2>
+        <form onsubmit="return validateForm()">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name" required><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email" required><br><br>
+
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="4" maxlength="500" oninput="updateCharacterCount()"></textarea><br>
+            <div id="char-count">0/500 characters</div>
+
+            <input type="submit" value="Send">
+        </form>
+    </section>
+
+    <footer>
+        <p>&copy; <span id="current-year"></span> Deeksha. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('active'); 
+        }
+
+        function validateForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+            if (name === "" || email === "" || message === "") {
+                alert("Please fill out all fields.");
+                return false;
+            }
+            return true;
+        }
+
+        function updateCharacterCount() {
+            const message = document.getElementById('message');
+            const charCount = message.value.length;
+            const charLimit = 500;
+            document.getElementById('char-count').innerText = `${charCount}/${charLimit} characters`;
+        }
+
+        document.getElementById('current-year').innerText = new Date().getFullYear();
+    </script>
+
+</body>
+</html>

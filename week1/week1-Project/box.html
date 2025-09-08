@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSS Box Model & Display Properties</title>
+    <style>
+        .box {
+            width: 200px;
+            height: 100px;
+            padding: 20px;
+            border: 5px solid #3498db;
+            margin: 20px;
+            background-color: lightyellow;
+            text-align: center;
+        }
+
+        .block {
+            display: block;
+            width: 200px;
+            height: 100px;
+            background-color: lightblue;
+            margin-bottom: 20px;
+            text-align: center;
+            line-height: 100px;
+        }
+
+        .inline {
+            display: inline;
+            background-color: lightgreen;
+            padding: 10px;
+            margin-right: 10px;
+            text-align: center;
+        }
+
+        .inline-block {
+            display: inline-block;
+            width: 150px;
+            height: 100px;
+            background-color: lightcoral;
+            padding: 10px;
+            margin-right: 10px;
+            text-align: center;
+            line-height: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="box">
+        This is a box with padding, border, and margin.
+    </div>
+
+    <div class="block">
+        Block Element
+    </div>
+    
+    <span class="inline">Inline 1</span>
+    <span class="inline">Inline 2</span>
+    <span class="inline">Inline 3</span>
+
+    <br><br>
+
+    <div class="inline-block">Inline-block 1</div>
+    <div class="inline-block">Inline-block 2</div>
+    <div class="inline-block">Inline-block 3</div>
+
+</html>

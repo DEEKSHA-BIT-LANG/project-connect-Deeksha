@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Responsive Layout</title>
+    <style>
+        
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+
+        .hero {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+        }
+
+        
+        .container {
+            display: flex;
+            padding: 20px;
+            flex-wrap: wrap; 
+        }
+
+        .sidebar {
+            flex: 1;
+            background-color: #fff;
+            padding: 20px;
+            margin-right: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .main-content {
+            flex: 2;
+            background-color: #fff;
+            padding: 20px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+
+        
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column; 
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    
+    <section class="hero">
+        <h1>Welcome to My Website</h1>
+    </section>
+
+    
+    <div class="container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h2>Sidebar</h2>
+            <p>This is the sidebar. It can contain links, navigation, or other info.</p>
+        </div>
+
+        
+        <div class="main-content">
+            <h2>Main Content</h2>
+            <p>This is the main content area. It can contain articles, blogs, or other important information.</p>
+        </div>
+    </div>
+
+</body>
+</html>

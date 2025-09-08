@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo List</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: #f4f4f4;
+            padding: 20px;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #todo-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        #todo-list li {
+            background-color: #fff;
+            margin: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        button {
+            background-color: red;
+            color: white;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: darkred;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Todo List</h1>
+    <ul id="todo-list"></ul>
+    <input type="text" id="todo-input" placeholder="Add a new todo" />
+    <button onclick="addTodo()">Add Todo</button>
+
+    <script>
+        // Load todos from localStorage
+        function loadTodos() {
+            const todos = JSON.parse(localStorage.getItem('todos')) || [];
+            const todoList = document.getElementById('todo-list');
+            todoList.innerHTML = '';
+            todos.forEach((todo, index) => {
+                const li = document.createElement('li');
+                li.innerHTML = `${todo} <button onclick="removeTodo(${index})">Remove</button>`;
+                todoList.appendChild(li);
+            });
+        }
+
+        // Add a new todo
+        function addTodo() {
+            const todoInput = document.getElementById('todo-input');
+            const todoText = todoInput.value.trim();
+            if (todoText) {
+                const todos = JSON.parse(localStorage.getItem('todos')) || [];
+                todos.push(todoText);
+                localStorage.setItem('todos', JSON.stringify(todos));
+                todoInput.value = '';
+                loadTodos();
+            }
+        }
+
+        // Remove a todo
+        function removeTodo(index) {
+            const todos = JSON.parse(localStorage.getItem('todos')) || [];
+            todos.splice(index, 1);
+            localStorage.setItem('todos', JSON.stringify(todos));
+            loadTodos();
+        }
+
+        // Load todos when page loads
+        window.onload = loadTodos;
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deeksha's Portfolio</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: white;
+            font-size: medium;
+        }
+
+        nav {
+            background-color: brown;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px;
+            position: relative;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            margin: 15px;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        #mobile-menu {
+            display: none;
+            position: absolute;
+            top: 50px;
+            left: 0;
+            width: 100%;
+            background-color: brown;
+            padding: 15px;
+            text-align: center;
+        }
+
+        #mobile-menu a {
+            display: block;
+            margin: 10px 0;
+        }
+
+        .menu-icon {
+            display: none;
+            font-size: 30px;
+            cursor: pointer;
+            color: white;
+        }
+
+        section {
+            padding: 2rem;
+            margin: 1rem;
+            background-color: rgba(16, 165, 106, 0.686);
+            border-radius: 10px;
+        }
+
+        #about img {
+            width: 120px;
+            border-radius: 5px;
+        }
+
+        #about p {
+            font-size: large;
+            font-style: bold;
+        }
+
+        h1, h2, h3, h4 {
+            color: purple;
+        }
+
+        ol {
+            padding-left: 20px;
+        }
+
+        li {
+            margin-bottom: 10px;
+        }
+
+        form input, form textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        form input[type="submit"] {
+            background-color: brown;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        form input[type="submit"]:hover {
+            background-color: lightgreen;
+        }
+
+        #char-count {
+            font-size: 14px;
+            color: gray;
+        }
+
+        footer {
+            margin-top: 2rem;
+        }
+
+        
+        body.dark {
+            background-color: #121212;
+            color: white;
+        }
+
+        nav.dark {
+            background-color: #333;
+        }
+
+        section.dark {
+            background-color: rgba(35, 35, 35, 0.9);
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <span class="menu-icon" onclick="toggleMenu()">&#9776;</span>
+        <div id="mobile-menu">
+            <a href="#about">About Me</a>
+            <a href="#skills">Skills</a>
+            <a href="#proj">Projects</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <a href="#about">About Me</a>
+        <a href="#skills">Skills</a>
+        <a href="#proj">Projects</a>
+        <a href="#contact">Contact</a>
+        <button onclick="toggleTheme()">Toggle Theme</button>
+    </nav>
+
+    <section id="about">
+        <h1>About Me</h1>
+        <img src="images/dee.jpg" alt="My photo">
+        <p>I am Deeksha, a 3rd-year computer science student.</p>
+    </section>
+
+    <section id="skills">
+        <h2>My Skills</h2>
+        <ol>
+            <li>HTML</li>
+            <li>CSS</li>
+            <li>JavaScript</li>
+            <li>Python</li>
+            <li>Java</li>
+        </ol>
+    </section>
+
+    <section id="proj">
+        <h3>My Projects</h3>
+        <p>Portfolio Website</p>
+        <p>Quiz App</p>
+        <p>QR-Drive</p>
+    </section>
+
+    <section id="contact">
+        <h4>Contact Me</h4>
+        <form id="contact-form" onsubmit="return validateForm()">
+            <label for="name">Name:</label><br>
+            <input type="text" id="name" name="name"><br>
+
+            <label for="email">Email:</label><br>
+            <input type="email" id="email" name="email"><br><br>
+
+            <label for="message">Message:</label><br>
+            <textarea id="message" name="message" rows="4" oninput="updateCharacterCount()"></textarea><br>
+            <div id="char-count">0/500 characters</div>
+
+            <input type="submit" value="Send">
+        </form>
+        <div id="form-error" style="color: red; display: none;">Please fill all fields correctly.</div>
+    </section>
+
+    <footer>
+        <p>&copy; <span id="current-year"></span> Deeksha. All rights reserved.</p>
+    </footer>
+
+    <script>
+       
+        function toggleMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+        }
+
+        
+        function updateCharacterCount() {
+            const message = document.getElementById('message');
+            const charCount = message.value.length;
+            const charLimit = 500;
+            document.getElementById('char-count').innerText = `${charCount}/${charLimit} characters`;
+        }
+
+    
+        document.getElementById('current-year').innerText = new Date().getFullYear();
+
+        
+        function validateForm() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const message = document.getElementById('message').value;
+
+            if (!name || !email || message.length < 20 || !/\S+@\S+\.\S+/.test(email)) {
+                document.getElementById('form-error').style.display = 'block';
+                return false;
+            }
+            document.getElementById('form-error').style.display = 'none';
+            return true;
+        }
+
+        
+        function toggleTheme() {
+            const body = document.body;
+            const nav = document.querySelector('nav');
+            const sections = document.querySelectorAll('section');
+            body.classList.toggle('dark');
+            nav.classList.toggle('dark');
+            sections.forEach(section => section.classList.toggle('dark'));
+
+            // Save theme preference to localStorage
+            const theme = body.classList.contains('dark') ? 'dark' : 'light';
+            localStorage.setItem('theme', theme);
+        }
+
+        function applyTheme() {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            if (savedTheme === 'dark') {
+                document.body.classList.add('dark');
+                document.querySelector('nav').classList.add('dark');
+                document.querySelectorAll('section').forEach(section => section.classList.add('dark'));
+            }
+        }
+
+        window.onload = applyTheme;
+    </script>
+</body>
+</html>
